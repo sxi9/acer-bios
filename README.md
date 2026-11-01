@@ -24,10 +24,11 @@ Everything learned while recovering, diagnosing and tuning an **Acer Nitro 5 AN5
 | Arch boots to black screen | **Fixed** | Display-manager was `sddm-plymouth` (broken); repointed to plain `sddm` + cleaned GRUB |
 | Logo hang (must enter BIOS to boot) | **Fix identified** | Firmware **Fast Boot** was enabled (stale memory-training context); disable it |
 | Change the Acer boot logo | **Blocked** | Row is `SuppressIf True`; the `Setup` variable is OS-write-protected (`dmpstore` fails). Only H2OUVE (SMI) could, risk not worth it |
-| Windows won't boot (BSOD, even safe mode) | **Fixed** | Stale **Fast Startup** `hiberfil.sys` resume failed after firmware/memory changes; renamed it from Linux |
+| Windows won't boot — `0xc0000001` | **Fixed** | Mismatched **boot config** on the ESP (Mar-2026 `bootmgfw.efi` vs Nov-2025 OS) + bad BCD edits; rebuilt with **`bcdboot`** from Hiren's WinPE — profile/apps/cookies kept. See [`docs/WINDOWS-BOOT-REPAIR.md`](docs/WINDOWS-BOOT-REPAIR.md) |
 
 ## Contents
 
+- [`docs/WINDOWS-BOOT-REPAIR.md`](docs/WINDOWS-BOOT-REPAIR.md) — the `0xc0000001` boot failure: full offline diagnosis, the `bcdboot` fix that kept everything, SSH/remote access, partition map
 - [`docs/FINDINGS.md`](docs/FINDINGS.md) — the RAM investigation with firmware-level proof, the hang, the logo lock, the Windows BSOD
 - [`docs/COMMANDS.md`](docs/COMMANDS.md) — every important command: passwordless SSH automation, Smokeless_UMAF staging, UEFI shell, memory checks, the hiberfil + GRUB fixes
 - [`docs/BIOS_OPTIONS_GUIDE.md`](docs/BIOS_OPTIONS_GUIDE.md) — curated guide to the hidden AMD CBS and Acer menus, with safety flags, factory defaults and known-good values

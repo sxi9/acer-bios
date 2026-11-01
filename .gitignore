@@ -1,0 +1,5 @@
+# EFI shell askpass helper (see docs/COMMANDS.md)
+*.bin
+*.b64
+ifr_raw.txt
+__pycache__/
